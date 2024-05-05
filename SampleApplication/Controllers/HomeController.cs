@@ -9,6 +9,10 @@ namespace SampleApplication.Controllers
     /// </summary>
     public class HomeController : Controller
     {
+        /// <summary>
+        /// Index
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
             return View();
@@ -23,7 +27,8 @@ namespace SampleApplication.Controllers
             PdfGenerator.PdfGenerator converter = new PdfGenerator.PdfGenerator();
             string data = GetHtmlContent();
             byte[] pdfBytes = converter.HtmlToPdf(data);
-            return File(pdfBytes, "application/pdf", "final.pdf");
+            byte[] imageBytes = converter.ConvertImageToPdf("wwwroot/Images/innovation.png");
+            return File(imageBytes, "application/pdf", "final.pdf");
         }
 
         /// <summary>
